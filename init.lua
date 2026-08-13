@@ -13,7 +13,8 @@ vim.o.termguicolors = true
 
 vim.cmd("colorscheme bamboo")
 
--- Make background transparent
+-- Make background transparent for the color schemes
+-- that doesn't support transparent
 -- vim.cmd([[
 --   hi Normal       guibg=NONE ctermbg=NONE
 --   hi NormalNC     guibg=NONE ctermbg=NONE
