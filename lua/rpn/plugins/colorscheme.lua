@@ -4,53 +4,54 @@ return {
 		priority = 1000,
 	},
 	{
-		"rebelot/kanagawa.nvim",
-		priority = 1000, -- Load before other plugins
-	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"ribru17/bamboo.nvim",
+		lazy = false,
 		priority = 1000,
-		opts = {
-			flavour = "macchiato", -- choose between latte, frappe, macchiato, mocha
-			transparent_background = true, -- disable setting background color
-			show_end_of_buffer = true,
-		},
-	},
-	{
-		"folke/tokyonight.nvim",
-		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			local bg = "#011628"
-			local bg_dark = "#011423"
-			local bg_highlight = "#143652"
-			local bg_search = "#0A64AC"
-			local bg_visual = "#275378"
-			local fg = "#CBE0F0"
-			local fg_dark = "#B4D0E9"
-			local fg_gutter = "#627E97"
-			local border = "#547998"
+			-- Lua
+			require("bamboo").setup({
+				-- Main options --
+				-- NOTE: to use the light theme, set `vim.o.background = 'light'`
+				style = "vulgaris", -- Choose between 'vulgaris' (regular), 'multiplex' (greener), and 'light'
+				toggle_style_key = nil, -- Keybind to toggle theme style. Leave it nil to disable it, or set it to a string, e.g. "<leader>ts"
+				toggle_style_list = { "vulgaris", "multiplex", "light" }, -- List of styles to toggle between
+				transparent = true, -- Show/hide background
+				dim_inactive = false, -- Dim inactive windows/buffers
+				term_colors = true, -- Change terminal color as per the selected theme style
+				ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+				cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
-			require("tokyonight").setup({
-				style = "night",
-				on_colors = function(colors)
-					colors.bg = bg
-					colors.bg_dark = bg_dark
-					colors.bg_float = bg_dark
-					colors.bg_highlight = bg_highlight
-					colors.bg_popup = bg_dark
-					colors.bg_search = bg_search
-					colors.bg_sidebar = bg_dark
-					colors.bg_statusline = bg_dark
-					colors.bg_visual = bg_visual
-					colors.border = border
-					colors.fg = fg
-					colors.fg_dark = fg_dark
-					colors.fg_float = fg
-					colors.fg_gutter = fg_gutter
-					colors.fg_sidebar = fg_dark
-				end,
+				-- Change code style ---
+				-- Options are anything that can be passed to the `vim.api.nvim_set_hl` table
+				-- You can also configure styles with a string, e.g. keywords = 'italic,bold'
+				code_style = {
+					comments = { italic = true },
+					conditionals = { italic = true },
+					keywords = {},
+					functions = {},
+					namespaces = { italic = true },
+					parameters = { italic = true },
+					strings = {},
+					variables = {},
+				},
+
+				-- Lualine options --
+				lualine = {
+					transparent = true, -- lualine center bar transparency
+				},
+
+				-- Custom Highlights --
+				colors = {}, -- Override default colors
+				highlights = {}, -- Override highlight groups
+
+				-- Plugins Config --
+				diagnostics = {
+					darker = false, -- darker colors for diagnostic
+					undercurl = true, -- use undercurl instead of underline for diagnostics
+					background = true, -- use background color for virtual text
+				},
 			})
+			require("bamboo").load()
 		end,
 	},
 }
