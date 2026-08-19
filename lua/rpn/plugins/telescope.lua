@@ -32,6 +32,11 @@ return {
 		telescope.load_extension("live_grep_args")
 		telescope.load_extension("tmux")
 
+		-- Upstream telescope-tmux hides the current session/window; list them instead
+		local tmux = require("rpn.telescope.tmux")
+		telescope.extensions.tmux.sessions = tmux.sessions
+		telescope.extensions.tmux.windows = tmux.windows
+
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
 

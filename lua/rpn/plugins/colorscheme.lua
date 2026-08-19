@@ -37,7 +37,7 @@ return {
 
 				-- Lualine options --
 				lualine = {
-					transparent = true, -- lualine center bar transparency
+					transparent = false, -- lualine center bar transparency
 				},
 
 				-- Custom Highlights --
